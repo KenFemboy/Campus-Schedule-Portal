@@ -1,0 +1,41 @@
+nav {
+  display: flex;
+  background-color: aliceblue;
+  justify-content: space-between;
+}
+#allschedules {
+  background-color: pink;
+  margin-bottom: 10px;
+}
+.schedules-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.schedules {
+  border: 5px solid black;
+  width: 200px;
+  margin: 10px;
+  padding: 10px;
+  background-color: white;
+}
+
+#announcementboard {
+  background-color: lightblue;
+}
+.announcement-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.post {
+  border: 3px solid black;
+  width: 250px;
+  margin: 10px;
+  background-color: white;
+  padding: 10px;
+}
+.post h3 {
+  text-decoration: underline;
+}
