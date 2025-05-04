@@ -1,8 +1,31 @@
-nav {
+.navbar {
   display: flex;
-  background-color: aliceblue;
   justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: white;
 }
+
+.logo,
+.profile-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.user-info {
+  text-align: right;
+  line-height: 1.2;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.department {
+  font-size: 0.9em;
+  color: #555;
+}
+
 #allschedules {
   background-color: pink;
   margin-bottom: 10px;
@@ -23,7 +46,7 @@ nav {
 #announcementboard {
   background-color: lightblue;
 }
-.announcement-container {
+.announcements-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
