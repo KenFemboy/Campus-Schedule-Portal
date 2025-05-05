@@ -2,6 +2,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Mainpage from "./Mainpage/Mainpage";
 import Student from "./Student/Student";
 import Faculty from "./Faculty/Faculty";
+import NavBar from "./Components/NavBar";
+import Announcements from "./Components/Announcements";
+import Footer from "./Components/Footer";
+
 function App() {
   const route = createBrowserRouter([
     {
@@ -19,7 +23,10 @@ function App() {
   ]);
   return (
     <div>
-      <RouterProvider router={route}></RouterProvider>
+      <NavBar />;
+      <RouterProvider router={route} />
+      <Announcements />
+      <Footer />
     </div>
   );
 }
