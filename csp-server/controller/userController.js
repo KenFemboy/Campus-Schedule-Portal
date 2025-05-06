@@ -1,6 +1,5 @@
 import { Student } from "../model/userModel.js";
 import { Faculty } from "../model/userModel.js";
-import Schedule from "../model/scheduleModel.js";
 
 export const createStudent = async (req, res) => {
   try {
