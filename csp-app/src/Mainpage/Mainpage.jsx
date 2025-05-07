@@ -7,16 +7,23 @@ const Mainpage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/schedules")
-      .then((res) => {
-        setSchedules(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Failed to fetch schedules:", err);
-        setLoading(false);
-      });
+    const fetchSchedules = () => {
+      axios
+        .get("http://localhost:8000/api/schedules")
+        .then((res) => {
+          setSchedules(res.data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error("Failed to fetch schedules:", err);
+          setLoading(false);
+        });
+    };
+
+    fetchSchedules(); // initial fetch
+    const interval = setInterval(fetchSchedules, 15000); // refresh every 15 seconds
+
+    return () => clearInterval(interval); // clean up when component unmounts
   }, []);
 
   const getStatusClass = (status) => {
@@ -63,16 +70,6 @@ const Mainpage = () => {
               </div>
             ))
           )}
-        </div>
-      </div>
-
-      <div id="announcementboard">
-        <h1>Announcements</h1>
-        <div className="announcements-container">
-          <div className="post">
-            <h3>IT 4444 - 1:30 to 2:30pm</h3>
-            <p>We will be having our exam tomorrow...</p>
-          </div>
         </div>
       </div>
     </div>
