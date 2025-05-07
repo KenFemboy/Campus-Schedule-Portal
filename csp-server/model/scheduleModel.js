@@ -7,6 +7,7 @@ const scheduleSchema = new mongoose.Schema({
   code: {
     type: String,
     required: true,
+    match: [/^\d{4}$/, "Course Code must be a 4-digit number"],
   },
   time: {
     type: String,

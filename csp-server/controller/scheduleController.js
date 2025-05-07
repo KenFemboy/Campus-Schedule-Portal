@@ -19,3 +19,15 @@ export const createSchedule = async (req, res) => {
     res.status(500).json({ errorMessage: error.message });
   }
 };
+
+export const getSchedules = async (req, res) => {
+  try {
+    const allSchedules = await Schedule.find();
+    if (!allSchedules || allSchedules.length === 0) {
+      return res.status(404).json({ message: "Schedules Empty" });
+    }
+    res.status(200).json(allSchedules);
+  } catch (error) {
+    res.status(500).json({ errorMessage: error.message });
+  }
+};

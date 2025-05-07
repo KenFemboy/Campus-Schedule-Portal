@@ -1,16 +1,47 @@
-#allschedules {
-  background-color: pink;
-  margin-bottom: 10px;
+#allschedules h1 {
+  padding: 1.3rem;
 }
+
+#allschedules {
+  background-color: #f7d6d6;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  text-align: center;
+}
+
 .schedules-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  text-align: left;
 }
+
 .schedules {
-  border: 5px solid black;
-  width: 200px;
-  margin: 10px;
-  padding: 10px;
-  background-color: white;
+  background-color: #e5e1e1;
+  border: 2px solid #cccaca;
+  border-radius: 10px;
+  padding: 20px;
+  width: calc(25% - 20px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.upcoming {
+  background-color: rgb(229, 229, 59);
+}
+
+.cancelled {
+  background-color: rgb(186, 25, 25);
+  color: white;
+}
+
+.ongoing {
+  background-color: rgb(86, 212, 86);
+}
+
+.schedules:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
