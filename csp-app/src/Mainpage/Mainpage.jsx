@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Mainpage.css";
+import NavBar from "../Components/NavBar";
 
 const Mainpage = () => {
   const [schedules, setSchedules] = useState([]);
@@ -42,6 +43,7 @@ const Mainpage = () => {
 
   return (
     <div>
+      <NavBar />
       <div id="allschedules">
         <h1>All Schedules</h1>
         <div className="schedules-container">

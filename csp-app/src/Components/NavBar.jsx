@@ -1,29 +1,29 @@
 import React from "react";
 import "./NavBar.css";
+import { Link } from "react-router-dom";
 const NavBar = () => {
   return (
     <div>
       <nav class="navbar">
-        <a href="../html/index.html">
+        <Link to="/">
           <img
             src="https://placehold.co/40x40?text=🏫"
             alt="school logo"
             class="logo"
           />
-        </a>
+        </Link>
 
         <div class="user-info">
-          <div class="name">Login</div>
           <div class="department">Class Schedule Portal</div>
         </div>
 
-        <a href="../html/login.html">
+        <Link to="/login">
           <img
             src="https://placehold.co/40x40?text=👤"
             alt="profile icon"
             class="profile-icon"
           />
-        </a>
+        </Link>
       </nav>
     </div>
   );

@@ -14,7 +14,7 @@ const Announcements = () => {
     };
 
     fetchAnnouncements(); // initial fetch
-    const interval = setInterval(fetchAnnouncements, 5000); // refresh every 5 seconds
+    const interval = setInterval(fetchAnnouncements, 15000); // refresh every 15 seconds
 
     return () => clearInterval(interval);
   }, []);
