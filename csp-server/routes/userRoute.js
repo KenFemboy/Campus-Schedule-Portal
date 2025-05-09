@@ -1,5 +1,10 @@
 import express from "express";
-import { createStudent, createFaculty } from "../controller/userController.js";
+import {
+  createStudent,
+  createFaculty,
+  favoriteSchedules,
+  getFavoriteSchedules,
+} from "../controller/userController.js";
 import {
   createSchedule,
   getSchedules,
@@ -16,8 +21,10 @@ route.post("/createStudent", createStudent);
 route.post("/createFaculty", createFaculty);
 route.post("/createSchedule", createSchedule);
 route.post("/createAnnouncement", createAnnouncement);
+route.post("/favorite", favoriteSchedules);
 //GET
 route.get("/schedules", getSchedules);
 route.get("/announcements", announcements);
+route.get("/:studentId/favorites", getFavoriteSchedules);
 
 export default route;

@@ -11,11 +11,21 @@ function App() {
   const route = createBrowserRouter([
     {
       path: "/",
-      element: <Mainpage />,
+      element: (
+        <>
+          <Mainpage />
+          <Announcements />
+        </>
+      ),
     },
     {
       path: "/student",
-      element: <Student />,
+      element: (
+        <>
+          <Student />
+          <Announcements />
+        </>
+      ),
     },
     {
       path: "/faculty",
@@ -25,11 +35,14 @@ function App() {
       path: "/login",
       element: <Login />,
     },
+    {
+      path: "/announcements",
+      element: <Announcements />,
+    },
   ]);
   return (
     <div>
       <RouterProvider router={route} />
-      <Announcements />
       <Footer />
     </div>
   );

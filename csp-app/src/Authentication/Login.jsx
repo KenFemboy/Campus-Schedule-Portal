@@ -11,7 +11,13 @@ const Login = () => {
           <img src="https://placehold.co/70" alt="" />
           <h3>Student Login</h3>
           <form action="../html/student/student.html" method="post">
-            <input type="number" placeholder="Student ID" />
+            <input
+              type="text"
+              inputMode="numeric"
+              pattern="\d*"
+              placeholder="Student ID"
+              maxLength={6}
+            />
             <input type="password" placeholder="Password" />
             <Link to="/student">
               <input type="button" value="Login" />
@@ -23,7 +29,13 @@ const Login = () => {
           <img src="https://placehold.co/70" alt="" />
           <h3>Faculty Login</h3>
           <form action="" method="post">
-            <input type="number" placeholder="Faculty ID" />
+            <input
+              type="text"
+              inputMode="numeric"
+              pattern="\d*"
+              placeholder="Faculty ID"
+              maxLength={6}
+            />
             <input type="password" placeholder="Password" />
             <Link to="/faculty">
               <input type="button" value="Login" />

@@ -64,3 +64,10 @@
 .button:hover {
   background-color: #333;
 }
+.favorite-btn {
+  background-color: gold;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}

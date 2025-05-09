@@ -17,6 +17,14 @@ const scheduleSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  room: {
+    type: String,
+    required: true,
+  },
+  professor: {
+    type: String,
+    required: true,
+  },
 });
 
 export default mongoose.model("Schedule", scheduleSchema);

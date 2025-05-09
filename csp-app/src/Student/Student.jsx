@@ -1,50 +1,60 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Student.css";
-import NavBar from "../Components/NavBar";
+import Mainpage from "../Mainpage/Mainpage";
+import axios from "axios";
+
 const Student = () => {
+  const [favoriteSchedules, setFavoriteSchedules] = useState([]);
+
+  const fetchFavoriteSchedules = async (studentId) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8000/${studentId}/favorites`
+      );
+      setFavoriteSchedules(response.data.favorites);
+    } catch (error) {
+      console.error("Error fetching favorite schedules:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchFavoriteSchedules("143323");
+  }, []);
+
   return (
     <div>
-      <NavBar />
-      <div class="container">
-        <div class="header">
-          Your Schedules
-          <span>
-            <a href="../html/studentADDCODE.html" rel="noopener noreferrer">
-              ➕
-            </a>
-          </span>
-        </div>
-        <br />
-        <div class="cards">
-          <div class="card">
-            <div class="close">×</div>
-            <div>IT</div>
-            <div>4444</div>
-            <div>1:30pm - 2:30pm</div>
-            <div>Room V3</div>
-          </div>
-          <div class="card">
-            <div class="close">×</div>
-            <div>IT</div>
-            <div>4445</div>
-            <div>2:30pm - 3:30pm</div>
-            <div>Room V4</div>
-          </div>
-          <div class="card">
-            <div class="close">×</div>
-            <div>IT</div>
-            <div>4444</div>
-            <div>1:30pm - 2:30pm</div>
-            <div>Room V3</div>
-          </div>
-          <div class="card">
-            <div class="close">×</div>
-            <div>IT</div>
-            <div>4445</div>
-            <div>2:30pm - 3:30pm</div>
-            <div>Room V4</div>
-          </div>
-        </div>
+      <Mainpage />
+
+      <div className="favorites">
+        <h1>Your Favorite Schedules</h1>
+        {favoriteSchedules.length > 0 ? (
+          <ul>
+            {favoriteSchedules.map((item) => (
+              <li key={item._id} className="favorite-schedule">
+                <p>
+                  <b>Course:</b> {item.course}
+                </p>
+                <p>
+                  <b>Code:</b> {item.code}
+                </p>
+                <p>
+                  <b>Time:</b> {item.time}
+                </p>
+                <p>
+                  <b>Status:</b> {item.status}
+                </p>
+                <p>
+                  <b>Room:</b> {item.room}
+                </p>
+                <p>
+                  <b>Professor:</b> {item.professor}
+                </p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No favorite schedules.</p>
+        )}
       </div>
     </div>
   );

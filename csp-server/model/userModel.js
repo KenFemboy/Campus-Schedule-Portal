@@ -11,6 +11,12 @@ const studentSchema = new mongoose.Schema({
     match: [/^\d{6}$/, "Student ID must be a 6-digit number"],
     unique: true,
   },
+  favorites: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Schedule", // assuming your schedule model is named 'Schedule'
+    },
+  ],
 });
 
 const facultySchema = new mongoose.Schema({

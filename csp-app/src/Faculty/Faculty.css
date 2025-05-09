@@ -3,9 +3,14 @@
   flex-wrap: wrap;
   gap: 20px;
 }
+.department {
+  display: flex;
+  justify-content: center;
+}
 .header {
   display: flex;
   align-items: center;
+  padding: 20px;
   font-size: 24px;
   font-weight: bold;
 }
@@ -23,7 +28,7 @@
 }
 .header span a {
   text-decoration: none;
-  color: white;
+  color: rgb(20, 14, 14);
 }
 .card {
   border: 1px solid #333;
@@ -34,7 +39,7 @@
 
 .card.gray {
   background-color: #aaa;
-  color: #444;
+  color: #0e0e0e;
 }
 
 .card.red {
@@ -69,7 +74,7 @@
 }
 
 .cancel-btn {
-  background-color: #f5533e;
+  background-color: #7d0a0a;
   color: white;
 }
 
@@ -107,20 +112,9 @@ select {
   text-align: center;
 }
 
-.add-button {
-  background-color: #333;
-  color: white;
-  padding: 15px 40px;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 30px;
-  align-self: flex-end;
-}
-
-.add-button:hover {
-  background-color: #555;
+#add-button:hover {
+  transition: background-color 0.3s;
+  background-color: #ee0d0d;
 }
 .delete-form {
   border: 1px solid #333;
@@ -133,7 +127,7 @@ select {
 }
 
 .input-field {
-  padding: 15px;
+  padding: 1px;
   width: 200px;
   border: 1px solid #333;
   border-radius: 25px;
@@ -141,16 +135,7 @@ select {
   text-align: center;
 }
 
-.delete-button {
-  background-color: #f5533e;
-  color: white;
-  padding: 15px 25px;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.delete-button:hover {
-  background-color: #d9422f;
+#delete-button:hover {
+  transition: background-color 0.3s;
+  background-color: #ee0d0d;
 }

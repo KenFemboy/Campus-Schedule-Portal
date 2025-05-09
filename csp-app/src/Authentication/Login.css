@@ -1,19 +1,24 @@
 body {
   background-color: lightgray;
 }
-h3 {
+#hd3 {
   text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff0505;
 }
 #container {
   display: flex;
   flex-direction: row;
-  background-color: bisque;
+  background-color: rgb(255, 255, 255);
+  border-radius: 1rem;
   flex-wrap: wrap;
   padding: 10px;
   justify-content: space-evenly;
 }
 .login {
-  border: 3px solid black;
+  border: 3px solid rgb(227, 223, 223);
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,11 +35,18 @@ h3 {
   padding: 10px;
   text-align: center;
   border-radius: 40px;
-  border: 2px black solid;
+  border: 2px rgb(0, 0, 0) solid;
 }
 
 .login form input[type="button"] {
   color: white;
-  background-color: darkslategray;
+  background-color: #7d0a0a;
   border: 0px;
+  width: 100%;
+}
+/* remove arrows on input filed */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

@@ -1,9 +1,8 @@
 #announcementboard {
-  background: linear-gradient(to bottom right, #e9e8e6, #d16e6e);
+  background: white;
   padding: 40px 30px;
   border-radius: 16px;
   margin: 40px 20px;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
 }
 
 #announcementboard h1 {
@@ -23,18 +22,18 @@
 }
 
 .post {
-  background: white;
+  background: rgb(235, 234, 234);
   padding: 20px 25px;
   border-radius: 12px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  width: 280px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid #dce3ec;
+  border: 1px solid rgb(235, 234, 234);
+  width: 300px;
 }
 
 .post:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .post h3 {
@@ -49,4 +48,28 @@
   color: #333;
   font-size: 15px;
   line-height: 1.4;
+}
+.announcement-form {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.announcement-form input,
+.announcement-form textarea {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.announcement-form button {
+  width: fit-content;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }

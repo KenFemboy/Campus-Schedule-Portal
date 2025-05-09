@@ -6,11 +6,7 @@ const NavBar = () => {
     <div>
       <nav class="navbar">
         <Link to="/">
-          <img
-            src="https://placehold.co/40x40?text=🏫"
-            alt="school logo"
-            class="logo"
-          />
+          <img alt="school logo" src="logo-csp.jpg" className="logo" />
         </Link>
 
         <div class="user-info">

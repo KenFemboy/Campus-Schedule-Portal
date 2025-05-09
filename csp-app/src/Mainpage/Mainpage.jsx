@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import "./Mainpage.css";
 import NavBar from "../Components/NavBar";
+import Announcements from "../Components/Announcements";
 
 const Mainpage = () => {
   const [schedules, setSchedules] = useState([]);
   const [loading, setLoading] = useState(true);
+  const location = useLocation(); // 👈 Get current route path
 
   useEffect(() => {
     const fetchSchedules = () => {
@@ -24,7 +27,7 @@ const Mainpage = () => {
     fetchSchedules(); // initial fetch
     const interval = setInterval(fetchSchedules, 15000); // refresh every 15 seconds
 
-    return () => clearInterval(interval); // clean up when component unmounts
+    return () => clearInterval(interval); // clean up
   }, []);
 
   const getStatusClass = (status) => {
@@ -39,6 +42,30 @@ const Mainpage = () => {
       default:
         return "";
     }
+  };
+
+  const renderButtons = (schedule) => {
+    const status = schedule.status.toLowerCase();
+
+    if (location.pathname === "/student") {
+      return <button className="favorite-btn">Favorite</button>;
+    }
+
+    if (location.pathname === "/faculty") {
+      // Only show buttons if the status is not "ongoing" or "cancelled"
+      if (
+        status !== "ongoing" &&
+        status !== "cancelled" &&
+        status !== "on going"
+      ) {
+        return (
+          <>
+            <button className="cancel-btn">Cancel</button>
+          </>
+        );
+      }
+    }
+    return null;
   };
 
   return (
@@ -69,6 +96,13 @@ const Mainpage = () => {
                 <p>
                   <b>Status:</b> {item.status}
                 </p>
+                <p>
+                  <b>Professor:</b> {item.professor}
+                </p>
+                <p>
+                  <b>Room:</b> {item.room}
+                </p>
+                <div className="schedule-buttons">{renderButtons(item)}</div>
               </div>
             ))
           )}
