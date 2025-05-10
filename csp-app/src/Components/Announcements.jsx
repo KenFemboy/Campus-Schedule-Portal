@@ -25,13 +25,17 @@ const Announcements = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!title || !paragraph) return;
+
     axios
-      .post("http://localhost:8000/api/announcements", {
+      .post("http://localhost:8000/api/createAnnouncement", {
         title,
         paragraph,
       })
       .then((res) => {
+        // Prepend the new announcement to the list
         setAnnouncements((prev) => [res.data, ...prev]);
+        // Reset form fields
         setTitle("");
         setParagraph("");
       })
@@ -44,7 +48,7 @@ const Announcements = () => {
         <h1>Announcements</h1>
 
         {/* Only show form if path is /faculty */}
-        {location.pathname === "/faculty" && (
+        {location.pathname.startsWith("/faculty/") && (
           <form className="announcement-form" onSubmit={handleSubmit}>
             <input
               type="text"

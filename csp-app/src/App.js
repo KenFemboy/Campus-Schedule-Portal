@@ -28,9 +28,10 @@ function App() {
       ),
     },
     {
-      path: "/faculty",
+      path: "/faculty/:facultyid",
       element: (
         <>
+          <Mainpage />
           <Faculty />
           <Announcements />
         </>

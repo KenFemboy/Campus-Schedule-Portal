@@ -57,7 +57,7 @@ const Mainpage = () => {
       );
     }
 
-    if (location.pathname === "/faculty") {
+    if (location.pathname.startsWith("/faculty/")) {
       // Only show buttons if the status is not "ongoing" or "cancelled"
       if (
         status !== "ongoing" &&

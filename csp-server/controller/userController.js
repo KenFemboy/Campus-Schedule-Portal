@@ -27,12 +27,12 @@ export const createStudent = async (req, res) => {
 
 export const createFaculty = async (req, res) => {
   try {
-    const { email, id, password } = req.body;
+    const { fullname, email, id, password } = req.body;
 
-    if (!email || !id || !password) {
+    if (!fullname || !email || !id || !password) {
       return res
         .status(400)
-        .json({ message: "Email, ID, and Password are required." });
+        .json({ message: "Full name, Email, ID, and Password are required." });
     }
 
     const existingFaculty = await Faculty.findOne({ $or: [{ email }, { id }] });
@@ -40,7 +40,7 @@ export const createFaculty = async (req, res) => {
       return res.status(400).json({ message: "Faculty already exists." });
     }
 
-    const newFaculty = new Faculty({ email, id, password });
+    const newFaculty = new Faculty({ fullname, email, id, password });
     await newFaculty.save();
 
     res.status(200).json({ message: "Faculty created successfully." });

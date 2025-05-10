@@ -55,6 +55,14 @@ const facultySchema = new mongoose.Schema({
       "Password must contain only letters and numbers (no spaces or special characters)",
     ],
   },
+  fullname: {
+    type: String,
+    required: true,
+    match: [
+      /^[A-Za-z0-9 ]+$/, // Note the space added after 0-9
+      "Full name can contain only letters, numbers, and spaces (no special characters).",
+    ],
+  },
 });
 
 export const Student = mongoose.model("Student", studentSchema);

@@ -15,7 +15,8 @@ export const createAnnouncement = async (req, res) => {
 
     res.status(201).json({ message: "Announcement created successfully." });
   } catch (error) {
-    res.status(500).json({ errorMessage: error.message });
+    console.error("Error removing favorite:", error); // full error object
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 

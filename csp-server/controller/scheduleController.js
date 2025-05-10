@@ -2,7 +2,8 @@ import Schedule from "../model/scheduleModel.js";
 
 export const createSchedule = async (req, res) => {
   try {
-    const { course, code, time, status, professor, room } = req.body;
+    const { course, code, time, status, professor, room, professorId } =
+      req.body;
 
     const existingSchedule = await Schedule.findOne({ code });
     if (existingSchedule) {
@@ -18,6 +19,7 @@ export const createSchedule = async (req, res) => {
       status,
       professor,
       room,
+      professorId,
     });
     await newSchedule.save();
 
