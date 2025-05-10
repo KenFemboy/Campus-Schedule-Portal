@@ -6,6 +6,7 @@ const Faculty = () => {
   return (
     <div>
       <Mainpage />
+      <Announcements />
     </div>
   );
 };
