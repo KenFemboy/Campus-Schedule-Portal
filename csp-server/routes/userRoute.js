@@ -4,6 +4,8 @@ import {
   createFaculty,
   favoriteSchedules,
   getFavoriteSchedules,
+  loginFaculty,
+  loginStudent,
 } from "../controller/userController.js";
 import {
   createSchedule,
@@ -15,13 +17,15 @@ import {
 } from "../controller/announcementController.js";
 
 const route = express.Router();
-5;
+
 //POST
 route.post("/createStudent", createStudent);
 route.post("/createFaculty", createFaculty);
 route.post("/createSchedule", createSchedule);
 route.post("/createAnnouncement", createAnnouncement);
 route.post("/favorite", favoriteSchedules);
+route.post("/loginFaculty", loginFaculty);
+route.post("/loginStudent", loginStudent);
 //GET
 route.get("/schedules", getSchedules);
 route.get("/announcements", announcements);

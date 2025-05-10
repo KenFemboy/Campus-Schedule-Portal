@@ -7,7 +7,7 @@ body {
   font-weight: bold;
   color: #ff0505;
 }
-#container {
+#loginContainer {
   display: flex;
   flex-direction: row;
   background-color: rgb(255, 255, 255);
@@ -50,3 +50,10 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+/* #loginContainer {
+  width: 100%;
+  justify-content: space-evenly;
+  display: flex;
+  flex-direction: row;
+  padding: 50px;
+} */

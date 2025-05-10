@@ -139,3 +139,22 @@ select {
   transition: background-color 0.3s;
   background-color: #ee0d0d;
 }
+
+.attend-btn {
+  background-color: green;
+  color: white;
+  border: none;
+  margin-right: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.cancel-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}

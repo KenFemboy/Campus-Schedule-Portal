@@ -3,14 +3,20 @@ import { Faculty } from "../model/userModel.js";
 
 export const createStudent = async (req, res) => {
   try {
-    const { email, id } = req.body;
+    const { email, id, password } = req.body;
+
+    if (!email || !id || !password) {
+      return res
+        .status(400)
+        .json({ message: "Email, ID, and Password are required." });
+    }
 
     const existingStudent = await Student.findOne({ $or: [{ email }, { id }] });
     if (existingStudent) {
       return res.status(400).json({ message: "Student already exists." });
     }
 
-    const newStudent = new Student({ email, id });
+    const newStudent = new Student({ email, id, password });
     await newStudent.save();
 
     res.status(200).json({ message: "Student created successfully." });
@@ -21,14 +27,20 @@ export const createStudent = async (req, res) => {
 
 export const createFaculty = async (req, res) => {
   try {
-    const { email, id } = req.body;
+    const { email, id, password } = req.body;
+
+    if (!email || !id || !password) {
+      return res
+        .status(400)
+        .json({ message: "Email, ID, and Password are required." });
+    }
 
     const existingFaculty = await Faculty.findOne({ $or: [{ email }, { id }] });
     if (existingFaculty) {
       return res.status(400).json({ message: "Faculty already exists." });
     }
 
-    const newFaculty = new Faculty({ email, id });
+    const newFaculty = new Faculty({ email, id, password });
     await newFaculty.save();
 
     res.status(200).json({ message: "Faculty created successfully." });
@@ -93,5 +105,45 @@ export const getFavoriteSchedules = async (req, res) => {
   } catch (error) {
     console.error("Error fetching favorite schedules:", error);
     return res.status(500).json({ message: "Server error." });
+  }
+};
+
+export const loginFaculty = async (req, res) => {
+  const { userId, password } = req.body;
+
+  try {
+    const faculty = await Faculty.findOne({ id: userId });
+
+    if (!faculty || faculty.password !== password) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    return res.status(200).json({
+      message: "Login successful",
+      userId: faculty.id,
+      userType: "faculty",
+    });
+  } catch (err) {
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const loginStudent = async (req, res) => {
+  const { userId, password } = req.body;
+
+  try {
+    const student = await Student.findOne({ id: userId });
+
+    if (!student || student.password !== password) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    return res.status(200).json({
+      message: "Login successful",
+      userId: student.id,
+      userType: "student",
+    });
+  } catch (err) {
+    return res.status(500).json({ message: "Server error" });
   }
 };

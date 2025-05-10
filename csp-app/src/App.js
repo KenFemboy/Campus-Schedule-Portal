@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Mainpage from "./Mainpage/Mainpage";
 import Student from "./Student/Student";
 import Faculty from "./Faculty/Faculty";
-import NavBar from "./Components/NavBar";
+
 import Announcements from "./Components/Announcements";
 import Footer from "./Components/Footer";
 import Login from "./Authentication/Login";
@@ -19,7 +19,7 @@ function App() {
       ),
     },
     {
-      path: "/student",
+      path: "/student/:studentid",
       element: (
         <>
           <Student />
