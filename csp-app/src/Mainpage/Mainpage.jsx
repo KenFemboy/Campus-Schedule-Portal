@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import "./Mainpage.css";
 import NavBar from "../Components/NavBar";
-import Announcements from "../Components/Announcements";
 
 const Mainpage = () => {
   const [schedules, setSchedules] = useState([]);
@@ -47,8 +46,15 @@ const Mainpage = () => {
   const renderButtons = (schedule) => {
     const status = schedule.status.toLowerCase();
 
-    if (location.pathname === "/student") {
-      return <button className="favorite-btn">Favorite</button>;
+    if (location.pathname.startsWith("/student/")) {
+      return (
+        <button
+          className="favorite-btn"
+          onClick={() => handleFavorite(schedule._id)}
+        >
+          Favorite
+        </button>
+      );
     }
 
     if (location.pathname === "/faculty") {
@@ -66,6 +72,25 @@ const Mainpage = () => {
       }
     }
     return null;
+  };
+
+  const handleFavorite = async (scheduleId) => {
+    const studentId = localStorage.getItem("userId"); // Or pass it as a prop/state
+
+    try {
+      await axios.post(
+        `http://localhost:8000/api/student/${studentId}/favorites`,
+        {
+          scheduleId,
+        }
+      );
+
+      alert("Schedule added to favorites!");
+      // Optionally re-fetch favorites here
+    } catch (error) {
+      console.error("Failed to add favorite:", error);
+      alert("Error adding favorite. Try again.");
+    }
   };
 
   return (

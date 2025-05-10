@@ -1,26 +1,44 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "./Student.css";
 import Mainpage from "../Mainpage/Mainpage";
 import axios from "axios";
 
 const Student = () => {
+  const { studentid } = useParams();
   const [favoriteSchedules, setFavoriteSchedules] = useState([]);
 
-  const fetchFavoriteSchedules = async (studentId) => {
+  const fetchFavoriteSchedules = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/${studentId}/favorites`
+        `http://localhost:8000/api/student/${studentid}/allfavorites`
       );
       setFavoriteSchedules(response.data.favorites);
     } catch (error) {
       console.error("Error fetching favorite schedules:", error);
     }
   };
+  const handleUnfavorite = async (scheduleCode) => {
+    try {
+      await axios.put(
+        `http://localhost:8000/api/student/${studentid}/unfavorite`,
+        { code: scheduleCode }
+      );
 
+      fetchFavoriteSchedules();
+    } catch (error) {
+      console.error("Error removing favorite:", error);
+    }
+  };
   useEffect(() => {
-    fetchFavoriteSchedules("143323");
-  }, []);
+    if (studentid) {
+      fetchFavoriteSchedules();
 
+      const intervalId = setInterval(fetchFavoriteSchedules, 5000);
+
+      return () => clearInterval(intervalId);
+    }
+  }, [studentid]);
   return (
     <div>
       <Mainpage />
@@ -49,6 +67,9 @@ const Student = () => {
                 <p>
                   <b>Professor:</b> {item.professor}
                 </p>
+                <button onClick={() => handleUnfavorite(item.code)}>
+                  Unfavorite
+                </button>
               </li>
             ))}
           </ul>

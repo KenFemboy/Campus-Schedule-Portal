@@ -6,6 +6,8 @@ import {
   getFavoriteSchedules,
   loginFaculty,
   loginStudent,
+  addtoFavoriteSchedule,
+  removefromFavoriteSchedule,
 } from "../controller/userController.js";
 import {
   createSchedule,
@@ -26,9 +28,12 @@ route.post("/createAnnouncement", createAnnouncement);
 route.post("/favorite", favoriteSchedules);
 route.post("/loginFaculty", loginFaculty);
 route.post("/loginStudent", loginStudent);
+route.post("/student/:id/favorites", addtoFavoriteSchedule);
 //GET
 route.get("/schedules", getSchedules);
 route.get("/announcements", announcements);
-route.get("/:studentId/favorites", getFavoriteSchedules);
+route.get("/student/:studentId/allfavorites", getFavoriteSchedules);
+//PUT
+route.put("/student/:id/unfavorite", removefromFavoriteSchedule);
 
 export default route;

@@ -29,7 +29,12 @@ function App() {
     },
     {
       path: "/faculty",
-      element: <Faculty />,
+      element: (
+        <>
+          <Faculty />
+          <Announcements />
+        </>
+      ),
     },
     {
       path: "/login",

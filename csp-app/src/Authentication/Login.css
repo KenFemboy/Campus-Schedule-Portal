@@ -50,10 +50,3 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-/* #loginContainer {
-  width: 100%;
-  justify-content: space-evenly;
-  display: flex;
-  flex-direction: row;
-  padding: 50px;
-} */

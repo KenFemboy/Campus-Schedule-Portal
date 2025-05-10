@@ -1,6 +1,6 @@
 import { Student } from "../model/userModel.js";
 import { Faculty } from "../model/userModel.js";
-
+import Schedule from "../model/scheduleModel.js";
 export const createStudent = async (req, res) => {
   try {
     const { email, id, password } = req.body;
@@ -67,12 +67,10 @@ export const favoriteSchedules = async (req, res) => {
     const isFavorite = student.favorites.includes(scheduleId);
 
     if (isFavorite) {
-      // Remove from favorites
       student.favorites = student.favorites.filter(
         (id) => id.toString() !== scheduleId
       );
     } else {
-      // Add to favorites
       student.favorites.push(scheduleId);
     }
 
@@ -100,11 +98,57 @@ export const getFavoriteSchedules = async (req, res) => {
     }
 
     return res.status(200).json({
-      favorites: student.favorites, // full schedule documents
+      favorites: student.favorites,
     });
   } catch (error) {
     console.error("Error fetching favorite schedules:", error);
     return res.status(500).json({ message: "Server error." });
+  }
+};
+
+export const addtoFavoriteSchedule = async (req, res) => {
+  const { id } = req.params;
+  const { scheduleId } = req.body;
+
+  try {
+    const student = await Student.findOne({ id });
+    if (!student) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+
+    if (!student.favorites.includes(scheduleId)) {
+      student.favorites.push(scheduleId);
+      await student.save();
+    }
+
+    res.status(200).json({
+      message: "Schedule added to favorites",
+      favorites: student.favorites,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const removefromFavoriteSchedule = async (req, res) => {
+  const { id } = req.params;
+  const { code } = req.body;
+
+  try {
+    const schedule = await Schedule.findOne({ code });
+    if (!schedule)
+      return res.status(404).json({ message: "Schedule not found" });
+
+    const student = await Student.findOneAndUpdate(
+      { id },
+      { $pull: { favorites: schedule._id } },
+      { new: true }
+    );
+
+    res.json({ message: "Schedule removed from favorites" });
+  } catch (error) {
+    console.error("Error removing favorite:", error); // full error object
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
