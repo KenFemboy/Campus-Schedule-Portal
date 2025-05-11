@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import "./Mainpage.css";
-import NavBar from "../Components/NavBar";
 
 const Mainpage = () => {
   const [schedules, setSchedules] = useState([]);
@@ -44,8 +43,6 @@ const Mainpage = () => {
   };
 
   const renderButtons = (schedule) => {
-    const status = schedule.status.toLowerCase();
-
     if (location.pathname.startsWith("/student/")) {
       return (
         <button
@@ -65,7 +62,7 @@ const Mainpage = () => {
 
     try {
       await axios.post(
-        `http://localhost:8000/api/student/${studentId}/favorites`,
+        `${process.env.REACT_APP_API}/api/student/${studentId}/favorites`,
         {
           scheduleId,
         }
