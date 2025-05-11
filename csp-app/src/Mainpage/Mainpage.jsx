@@ -11,7 +11,7 @@ const Mainpage = () => {
   useEffect(() => {
     const fetchSchedules = () => {
       axios
-        .get("http://localhost:8000/api/schedules")
+        .get(`${process.env.REACT_APP_API}/api/schedules`)
         .then((res) => {
           setSchedules(res.data);
           setLoading(false);
