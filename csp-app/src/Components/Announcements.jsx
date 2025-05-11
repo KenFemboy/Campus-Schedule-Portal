@@ -43,7 +43,9 @@ const Announcements = () => {
   const handleDelete = async (title) => {
     try {
       await axios.delete(
-        `http://localhost:8000/api/announcements/${encodeURIComponent(title)}`
+        `https://campus-schedule-portal.onrender.com/api/announcements/${encodeURIComponent(
+          title
+        )}`
       );
       setAnnouncements((prev) => prev.filter((a) => a.title !== title));
     } catch (err) {

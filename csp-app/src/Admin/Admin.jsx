@@ -15,8 +15,8 @@ const Admin = () => {
     const fetchUsers = async () => {
       try {
         const [studentRes, facultyRes] = await Promise.all([
-          axios.get("${process.env.REACT_APP_API}:8000/api/students"),
-          axios.get("${process.env.REACT_APP_API}:8000/api/faculty"),
+          axios.get("https://campus-schedule-portal.onrender.com/api/students"),
+          axios.get("https://campus-schedule-portal.onrender.com/api/faculty"),
         ]);
         setStudents(studentRes.data);
         setFaculty(facultyRes.data);

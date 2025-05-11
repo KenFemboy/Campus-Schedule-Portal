@@ -11,7 +11,7 @@ const Mainpage = () => {
   useEffect(() => {
     const fetchSchedules = () => {
       axios
-        .get(`${process.env.REACT_APP_API}/api/schedules`)
+        .get(`https://campus-schedule-portal.onrender.com/api/schedules`)
         .then((res) => {
           setSchedules(res.data);
           setLoading(false);
@@ -62,7 +62,7 @@ const Mainpage = () => {
 
     try {
       await axios.post(
-        `${process.env.REACT_APP_API}/api/student/${studentId}/favorites`,
+        `https://campus-schedule-portal.onrender.com/api/student/${studentId}/favorites`,
         {
           scheduleId,
         }

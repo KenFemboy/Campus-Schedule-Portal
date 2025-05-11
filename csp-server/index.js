@@ -7,7 +7,7 @@ import cors from "cors";
 const app = express();
 app.use(
   cors({
-    origin: "https://campus-schedule-portal-project.onrender.com/",
+    origin: "https://campus-schedule-portal-project.onrender.com",
     credentials: true,
   })
 );
