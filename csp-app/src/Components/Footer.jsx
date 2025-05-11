@@ -7,12 +7,10 @@ const Footer = () => {
       <footer class="site-footer">
         <p>&copy; 2025 Your Company Name. All rights reserved.</p>
         <nav>
-          <a href="/privacy-policy">Privacy Policy</a> |
-          <a href="/terms-of-service">Terms of Service</a> |
-          <a href="/contact">Contact Us</a>
+          <p>Privacy Policy</p> |<p>Terms of Service</p> |<p>Contact Us</p>
         </nav>
         <Link to="/admin">
-          <a>👾</a>
+          <p>👾</p>
         </Link>
       </footer>
     </div>
