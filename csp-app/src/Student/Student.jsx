@@ -11,7 +11,7 @@ const Student = () => {
   const fetchFavoriteSchedules = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/student/${studentid}/allfavorites`
+        `https://campus-schedule-portal.onrender.com/api/student/${studentid}/allfavorites`
       );
       setFavoriteSchedules(response.data.favorites);
     } catch (error) {
@@ -21,7 +21,7 @@ const Student = () => {
   const handleUnfavorite = async (scheduleCode) => {
     try {
       await axios.put(
-        `http://localhost:8000/api/student/${studentid}/unfavorite`,
+        `https://campus-schedule-portal.onrender.com/api/student/${studentid}/unfavorite`,
         { code: scheduleCode }
       );
 

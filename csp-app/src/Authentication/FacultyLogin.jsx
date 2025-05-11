@@ -17,7 +17,7 @@ const FacultyLogin = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/loginFaculty",
+        "https://campus-schedule-portal.onrender.com/api/loginFaculty",
         userData
       );
 

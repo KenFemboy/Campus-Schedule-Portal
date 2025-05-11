@@ -21,7 +21,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/createStudent",
+        "https://campus-schedule-portal.onrender.com/api/createStudent",
         student
       );
       alert(response.data.message);
@@ -34,7 +34,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/createFaculty",
+        "https://campus-schedule-portal.onrender.com/api/createFaculty",
         faculty
       );
       alert(response.data.message);

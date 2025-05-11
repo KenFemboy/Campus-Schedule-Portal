@@ -12,7 +12,7 @@ const Announcements = () => {
   useEffect(() => {
     const fetchAnnouncements = () => {
       axios
-        .get("http://localhost:8000/api/announcements")
+        .get("https://campus-schedule-portal.onrender.com/api/announcements")
         .then((res) => setAnnouncements(res.data))
         .catch((err) => console.error("Error fetching announcements:", err));
     };
@@ -28,10 +28,13 @@ const Announcements = () => {
     if (!title || !paragraph) return;
 
     axios
-      .post("http://localhost:8000/api/createAnnouncement", {
-        title,
-        paragraph,
-      })
+      .post(
+        "https://campus-schedule-portal.onrender.com/api/createAnnouncement",
+        {
+          title,
+          paragraph,
+        }
+      )
       .then((res) => {
         setAnnouncements((prev) => [res.data, ...prev]);
         setTitle("");
