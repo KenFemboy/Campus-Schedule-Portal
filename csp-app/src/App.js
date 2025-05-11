@@ -18,6 +18,7 @@ function App() {
           <NavBar />
           <Mainpage />
           <Announcements />
+          <Footer />
         </>
       ),
     },
@@ -62,7 +63,6 @@ function App() {
   return (
     <div>
       <RouterProvider router={route} />
-      <Footer />
     </div>
   );
 }
