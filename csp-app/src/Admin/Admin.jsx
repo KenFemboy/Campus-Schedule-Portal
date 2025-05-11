@@ -1,47 +1,75 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Register from "./Register.jsx";
+import Announcements from "../Components/Announcements.jsx";
+import MainPage from "../Mainpage/Mainpage.jsx";
+import axios from "axios";
+import "./Admin.css"; // Optional: for styling
 
 const Admin = () => {
+  const [students, setStudents] = useState([]);
+  const [faculty, setFaculty] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch all students and faculty
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const [studentRes, facultyRes] = await Promise.all([
+          axios.get("http://localhost:8000/api/students"),
+          axios.get("http://localhost:8000/api/faculty"),
+        ]);
+        setStudents(studentRes.data);
+        setFaculty(facultyRes.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
   return (
     <div>
-      <div id="container">
-        <div class="register">
-          <img src="https://placehold.co/70" alt="" />
-          <h3>Student Login</h3>
-          <form action="../html/student/student.html" method="post">
-            <input
-              type="text"
-              inputMode="numeric"
-              pattern="\d*"
-              placeholder="Student ID"
-              maxLength={6}
-            />
-            <input type="email" />
+      <Register />
+      <Announcements />
+      <MainPage />
 
-            <input type="password" placeholder="Password" />
-            <Link to="/student">
-              <input type="button" value="Login" />
-            </Link>
-          </form>
-        </div>
+      <div className="students">
+        <h2>All Students</h2>
+        {loading ? (
+          <p>Loading students...</p>
+        ) : students.length === 0 ? (
+          <p>No students found.</p>
+        ) : (
+          <ul>
+            {students.map((student) => (
+              <li key={student._id}>
+                <strong>{student.fullname}</strong> — ID: {student.id} — Email:{" "}
+                {student.email}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
 
-        <div class="register">
-          <img src="https://placehold.co/70" alt="" />
-          <h3>Faculty Login</h3>
-          <form action="" method="post">
-            <input
-              type="text"
-              inputMode="numeric"
-              pattern="\d*"
-              placeholder="Faculty ID"
-              maxLength={6}
-            />
-            <input type="email" />
-            <input type="password" placeholder="Password" />
-            <Link to="/faculty">
-              <input type="button" value="Login" />
-            </Link>
-          </form>
-        </div>
+      <div className="faculty">
+        <h2>All Faculty</h2>
+        {loading ? (
+          <p>Loading faculty...</p>
+        ) : faculty.length === 0 ? (
+          <p>No faculty found.</p>
+        ) : (
+          <ul>
+            {faculty.map((member) => (
+              <li key={member._id}>
+                <strong>{member.fullname}</strong> — ID: {member.id} — Email:{" "}
+                {member.email}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

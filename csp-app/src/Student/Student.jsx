@@ -56,7 +56,16 @@ const Student = () => {
                   <b>Code:</b> {item.code}
                 </p>
                 <p>
-                  <b>Time:</b> {item.time}
+                  <b>Time:</b>{" "}
+                  {new Date(item.startTime).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}{" "}
+                  -{" "}
+                  {new Date(item.endTime).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
                 </p>
                 <p>
                   <b>Status:</b> {item.status}

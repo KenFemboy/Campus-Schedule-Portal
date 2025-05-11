@@ -65,9 +65,76 @@
   background-color: #333;
 }
 .favorite-btn {
-  background-color: gold;
+  background-color: green;
   border: none;
   padding: 6px 12px;
   cursor: pointer;
   border-radius: 4px;
+}
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: rgb(214, 212, 212);
+  margin: 0;
+  padding: 2rem;
+  color: #333;
+}
+
+.favorites {
+  max-width: 800px;
+  margin: auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.favorites h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.favorite-schedule {
+  border: 1px solid #e0e0e0;
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin-bottom: 1.2rem;
+  background-color: #fafafa;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.favorite-schedule:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.favorite-schedule p {
+  margin: 0.4rem 0;
+  line-height: 1.4;
+}
+
+.favorite-schedule b {
+  color: #2c3e50;
+}
+
+button {
+  margin-top: 1rem;
+  background-color: #7d0a0a;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #c0392b;
 }

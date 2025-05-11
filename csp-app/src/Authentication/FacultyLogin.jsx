@@ -34,7 +34,8 @@ const FacultyLogin = () => {
   return (
     <div id="container">
       <div className="login">
-        <img src="https://placehold.co/70" alt="Faculty Icon" />
+        <img src="/svg/faculty.svg" alt="Student Icon" />
+
         <h3>Faculty Login</h3>
         <form onSubmit={handleLogin}>
           <input

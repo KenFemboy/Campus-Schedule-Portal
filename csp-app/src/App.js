@@ -6,6 +6,8 @@ import FacultyCreateSchedule from "./Faculty/FacultyCreateSchedule";
 import Announcements from "./Components/Announcements";
 import Footer from "./Components/Footer";
 import Login from "./Authentication/Login";
+import Admin from "./Admin/Admin";
+import NavBar from "./Components/NavBar";
 
 function App() {
   const route = createBrowserRouter([
@@ -13,6 +15,7 @@ function App() {
       path: "/",
       element: (
         <>
+          <NavBar />
           <Mainpage />
           <Announcements />
         </>
@@ -31,19 +34,29 @@ function App() {
       path: "/faculty/:facultyid",
       element: (
         <>
+          <NavBar />
           <Faculty />
           <FacultyCreateSchedule />
-          {/* <Announcements /> */}
+          <Announcements />
         </>
       ),
     },
     {
       path: "/login",
-      element: <Login />,
+      element: (
+        <>
+          <NavBar />
+          <Login />
+        </>
+      ),
     },
     {
       path: "/announcements",
       element: <Announcements />,
+    },
+    {
+      path: "/admin",
+      element: <Admin />,
     },
   ]);
   return (

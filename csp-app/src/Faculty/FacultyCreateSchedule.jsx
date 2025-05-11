@@ -81,14 +81,7 @@ const FacultyCreateSchedule = () => {
     const startDateTime = new Date(`${todayDate}T${startTime}:00`);
     const endDateTime = new Date(`${todayDate}T${endTime}:00`);
 
-    let computedStatus = "";
-    if (now >= startDateTime && now <= endDateTime) {
-      computedStatus = "ongoing";
-    } else if (now < startDateTime) {
-      computedStatus = "upcoming";
-    } else {
-      computedStatus = "upcoming";
-    }
+    let computedStatus = "upcoming";
 
     const scheduleData = {
       course,

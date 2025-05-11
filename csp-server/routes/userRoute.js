@@ -17,12 +17,17 @@ import {
   getScheduleByFacultyId,
   cancelSchedulebyCode,
   markScheduleAsUpcoming,
+  markScheduleAsOngoing,
 } from "../controller/scheduleController.js";
 import {
   announcements,
   createAnnouncement,
 } from "../controller/announcementController.js";
-
+import {
+  getAllStudent,
+  getAllFaculty,
+  deleteAnnouncement,
+} from "../controller/adminController.js";
 const route = express.Router();
 
 //POST
@@ -42,9 +47,16 @@ route.get("/schedules", getSchedules);
 route.get("/schedules/:id", getScheduleByFacultyId);
 route.get("/announcements", announcements);
 route.get("/student/:studentId/allfavorites", getFavoriteSchedules);
+
+//GET ADMIN
+route.get("/students", getAllStudent);
+route.get("/faculty", getAllFaculty);
+// DELETE ADMIN
+route.delete("/announcements/:title", deleteAnnouncement);
 //PUT
 route.put("/student/:id/unfavorite", removefromFavoriteSchedule);
 route.put("/schedules/:code/cancel", cancelSchedulebyCode);
 route.put("/schedules/:code/upcoming", markScheduleAsUpcoming);
+route.put("/schedules/:code/ongoing", markScheduleAsOngoing);
 
 export default route;

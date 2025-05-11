@@ -81,7 +81,6 @@ const Mainpage = () => {
 
   return (
     <div>
-      <NavBar />
       <div id="allschedules">
         <h1>All Schedules</h1>
         <div className="schedules-container">

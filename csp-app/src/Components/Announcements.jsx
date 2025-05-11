@@ -17,8 +17,8 @@ const Announcements = () => {
         .catch((err) => console.error("Error fetching announcements:", err));
     };
 
-    fetchAnnouncements(); // initial fetch
-    const interval = setInterval(fetchAnnouncements, 15000); // refresh every 15 seconds
+    fetchAnnouncements();
+    const interval = setInterval(fetchAnnouncements, 15000);
 
     return () => clearInterval(interval);
   }, []);
@@ -33,13 +33,22 @@ const Announcements = () => {
         paragraph,
       })
       .then((res) => {
-        // Prepend the new announcement to the list
         setAnnouncements((prev) => [res.data, ...prev]);
-        // Reset form fields
         setTitle("");
         setParagraph("");
       })
       .catch((err) => console.error("Error posting announcement:", err));
+  };
+
+  const handleDelete = async (title) => {
+    try {
+      await axios.delete(
+        `http://localhost:8000/api/announcements/${encodeURIComponent(title)}`
+      );
+      setAnnouncements((prev) => prev.filter((a) => a.title !== title));
+    } catch (err) {
+      console.error("Error deleting announcement:", err);
+    }
   };
 
   return (
@@ -47,7 +56,6 @@ const Announcements = () => {
       <div id="announcementboard">
         <h1>Announcements</h1>
 
-        {/* Only show form if path is /faculty */}
         {location.pathname.startsWith("/faculty/") && (
           <form className="announcement-form" onSubmit={handleSubmit}>
             <input
@@ -75,6 +83,14 @@ const Announcements = () => {
               <div key={index} className="post">
                 <h3>{post.title}</h3>
                 <p>{post.paragraph}</p>
+                {location.pathname === "/admin" && (
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDelete(post.title)}
+                  >
+                    Delete
+                  </button>
+                )}
               </div>
             ))}
         </div>

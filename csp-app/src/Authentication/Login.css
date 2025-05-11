@@ -37,6 +37,9 @@ body {
   border-radius: 40px;
   border: 2px rgb(0, 0, 0) solid;
 }
+.login img {
+  width: 70px;
+}
 
 .login form input[type="button"] {
   color: white;

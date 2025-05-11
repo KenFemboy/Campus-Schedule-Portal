@@ -6,20 +6,29 @@ const NavBar = () => {
     <div>
       <nav class="navbar">
         <Link to="/">
-          <img alt="school logo" src="logo-csp.jpg" className="logo" />
+          <img src="/svg/final-logo.svg" alt="Student Icon" className="logo" />
         </Link>
 
         <div class="user-info">
           <div class="department">Class Schedule Portal</div>
         </div>
-
-        <Link to="/login">
-          <img
-            src="https://placehold.co/40x40?text=👤"
-            alt="profile icon"
-            class="profile-icon"
-          />
-        </Link>
+        <div class="logos">
+          <Link to="/announcements">
+            <img
+              src="/svg/announcements.svg"
+              alt="Student Icon"
+              className="loginsvg"
+            />
+          </Link>
+          <Link to="/login">
+            <img
+              src="/svg/login.svg"
+              id="loginlogo"
+              alt="Student Icon"
+              className="loginsvg"
+            />
+          </Link>
+        </div>
       </nav>
     </div>
   );

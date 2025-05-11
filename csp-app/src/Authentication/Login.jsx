@@ -7,7 +7,6 @@ import FacultyLogin from "./FacultyLogin";
 const Login = () => {
   return (
     <div>
-      <NavBar />
       <div id="loginContainer">
         <StudentLogin />
         <FacultyLogin />

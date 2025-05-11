@@ -140,3 +140,20 @@ export const markScheduleAsUpcoming = async (req, res) => {
     res.status(500).json({ message: "Error updating schedule", error });
   }
 };
+export const markScheduleAsOngoing = async (req, res) => {
+  try {
+    const updated = await Schedule.findOneAndUpdate(
+      { code: req.params.code }, // Find by the course code
+      { status: "ongoing" }, // Change status to "ongoing"
+      { new: true } // Return the updated document
+    );
+
+    if (!updated) {
+      return res.status(404).json({ message: "Schedule not found" });
+    }
+
+    res.json(updated); // Return the updated schedule
+  } catch (error) {
+    res.status(500).json({ message: "Error updating schedule", error });
+  }
+};
