@@ -31,11 +31,19 @@ const Faculty = () => {
       console.error("Error cancelling schedule:", error);
     }
   };
+  const handleMakeUpcoming = async (scheduleCode) => {
+    try {
+      await axios.put(
+        `http://localhost:8000/api/schedules/${scheduleCode}/upcoming`
+      );
+      fetchSchedules(); // Refresh the schedule list after the update
+    } catch (error) {
+      console.error("Error updating schedule:", error);
+    }
+  };
 
   const getStatusClass = (status) => {
     switch (status) {
-      case "ongoing":
-        return "ongoing";
       case "upcoming":
         return "upcoming";
       case "cancelled":
@@ -97,6 +105,12 @@ const Faculty = () => {
                 {item.status === "upcoming" && (
                   <button onClick={() => handleCancel(item.code)}>
                     Cancel
+                  </button>
+                )}
+
+                {item.status === "cancelled" && (
+                  <button onClick={() => handleMakeUpcoming(item.code)}>
+                    Make Upcoming
                   </button>
                 )}
               </div>

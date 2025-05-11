@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="faculty-schedule-form">
+      <h1>Add a Schedule</h1>
+      <form>
+        <label>Course</label
+        ><select required="">
+          <option value="">Select Course</option>
+          <option value="IT">IT</option>
+          <option value="CS">CS</option>
+          <option value="Engineering">Engineering</option></select
+        ><input
+          placeholder="Code (4 digits)"
+          required=""
+          pattern="\d{4}"
+          maxlength="4"
+          type="text"
+          value=""
+        /><label
+          >Time Range (30-minute intervals from 7:00 AM - 10:00 PM)</label
+        >
+        <div style="display: flex; gap: 1rem">
+          <input
+            min="07:00"
+            max="22:00"
+            required=""
+            type="time"
+            value=""
+          /><span>to</span
+          ><input
+            min="07:00"
+            max="22:00"
+            required=""
+            step="1800"
+            type="time"
+            value=""
+          />
+        </div>
+        <label>Room</label
+        ><select required="">
+          <option value="">Select Room</option>
+          <option value="101">101</option>
+          <option value="102">102</option>
+          <option value="103">103</option>
+          <option value="104">104</option></select
+        ><input
+          placeholder="Professor Name"
+          readonly=""
+          type="text"
+          value="Charles Kent Labrador"
+        /><input readonly="" type="text" value="243847" /><button type="submit">
+          Add Schedule
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

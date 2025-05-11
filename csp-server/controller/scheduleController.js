@@ -123,26 +123,20 @@ export const cancelSchedulebyCode = async (req, res) => {
   }
 };
 
-export const refreshScheduleStatus = async (req, res) => {
+export const markScheduleAsUpcoming = async (req, res) => {
   try {
-    const now = new Date();
-
-    // Update to "upcoming" where status is not already cancelled and current time is < startTime
-    const result = await Schedule.updateMany(
-      {
-        status: { $ne: "cancelled" },
-        startTime: { $gt: now },
-      },
-      { $set: { status: "upcoming" } }
+    const updated = await Schedule.findOneAndUpdate(
+      { code: req.params.code }, // Find by the course code
+      { status: "upcoming" }, // Update status to "upcoming"
+      { new: true } // Return the updated document
     );
 
-    res.status(200).json({
-      message: `Schedules updated: ${result.modifiedCount} set to 'upcoming'`,
-    });
+    if (!updated) {
+      return res.status(404).json({ message: "Schedule not found" });
+    }
+
+    res.json(updated); // Return the updated schedule
   } catch (error) {
-    console.error("Error updating schedule statuses:", error);
-    res
-      .status(500)
-      .json({ message: "Failed to update schedule statuses", error });
+    res.status(500).json({ message: "Error updating schedule", error });
   }
 };

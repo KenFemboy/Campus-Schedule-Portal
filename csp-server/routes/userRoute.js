@@ -16,6 +16,7 @@ import {
   getSchedules,
   getScheduleByFacultyId,
   cancelSchedulebyCode,
+  markScheduleAsUpcoming,
 } from "../controller/scheduleController.js";
 import {
   announcements,
@@ -44,5 +45,6 @@ route.get("/student/:studentId/allfavorites", getFavoriteSchedules);
 //PUT
 route.put("/student/:id/unfavorite", removefromFavoriteSchedule);
 route.put("/schedules/:code/cancel", cancelSchedulebyCode);
+route.put("/schedules/:code/upcoming", markScheduleAsUpcoming);
 
 export default route;
