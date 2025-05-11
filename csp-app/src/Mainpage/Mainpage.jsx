@@ -57,20 +57,6 @@ const Mainpage = () => {
       );
     }
 
-    if (location.pathname.startsWith("/faculty/")) {
-      // Only show buttons if the status is not "ongoing" or "cancelled"
-      if (
-        status !== "ongoing" &&
-        status !== "cancelled" &&
-        status !== "on going"
-      ) {
-        return (
-          <>
-            <button className="cancel-btn">Cancel</button>
-          </>
-        );
-      }
-    }
     return null;
   };
 
@@ -116,7 +102,16 @@ const Mainpage = () => {
                   <b>Code:</b> {item.code}
                 </p>
                 <p>
-                  <b>Time:</b> {item.time}
+                  <b>Time:</b>{" "}
+                  {new Date(item.startTime).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}{" "}
+                  -{" "}
+                  {new Date(item.endTime).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
                 </p>
                 <p>
                   <b>Status:</b> {item.status}

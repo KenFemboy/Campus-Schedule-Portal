@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Mainpage from "./Mainpage/Mainpage";
 import Student from "./Student/Student";
 import Faculty from "./Faculty/Faculty";
-
+import FacultyCreateSchedule from "./Faculty/FacultyCreateSchedule";
 import Announcements from "./Components/Announcements";
 import Footer from "./Components/Footer";
 import Login from "./Authentication/Login";
@@ -31,9 +31,9 @@ function App() {
       path: "/faculty/:facultyid",
       element: (
         <>
-          <Mainpage />
           <Faculty />
-          <Announcements />
+          <FacultyCreateSchedule />
+          {/* <Announcements /> */}
         </>
       ),
     },

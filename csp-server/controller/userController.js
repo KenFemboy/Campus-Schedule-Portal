@@ -3,9 +3,9 @@ import { Faculty } from "../model/userModel.js";
 import Schedule from "../model/scheduleModel.js";
 export const createStudent = async (req, res) => {
   try {
-    const { email, id, password } = req.body;
+    const { fullname, email, id, password } = req.body;
 
-    if (!email || !id || !password) {
+    if (!fullname || !email || !id || !password) {
       return res
         .status(400)
         .json({ message: "Email, ID, and Password are required." });
@@ -16,7 +16,7 @@ export const createStudent = async (req, res) => {
       return res.status(400).json({ message: "Student already exists." });
     }
 
-    const newStudent = new Student({ email, id, password });
+    const newStudent = new Student({ fullname, email, id, password });
     await newStudent.save();
 
     res.status(200).json({ message: "Student created successfully." });
@@ -46,6 +46,37 @@ export const createFaculty = async (req, res) => {
     res.status(200).json({ message: "Faculty created successfully." });
   } catch (error) {
     res.status(500).json({ errorMessage: error.message });
+  }
+};
+export const getFullnameStudent = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Find student by custom "id" field (not _id)
+    const student = await Student.findOne({ id });
+
+    if (!student) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+
+    res.status(200).json({ fullname: student.fullname });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+export const getFullnameFaculty = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const faculty = await Faculty.findOne({ id });
+
+    if (!faculty) {
+      return res.status(404).json({ message: "Faculty not found" });
+    }
+
+    res.status(200).json({ fullname: faculty.fullname });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 

@@ -1,101 +1,109 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
-import { useParams } from "react-router-dom"; // Import useParams
+import "./Faculty.css";
 
 const Faculty = () => {
-  const { facultyid } = useParams(); // Get facultyId from URL
-  const [course, setCourse] = useState("");
-  const [code, setCode] = useState("");
-  const [time, setTime] = useState("");
-  const [status, setStatus] = useState("");
-  const [professor, setProfessor] = useState(""); // Professor name input
-  const [room, setRoom] = useState("101"); // Default room or could be an input
+  const { facultyid } = useParams();
+  const [schedules, setSchedules] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    // Prepare data for the request
-    const scheduleData = {
-      course,
-      code,
-      time,
-      status,
-      room, // Room is set to a default value or could be an input
-      professor, // Professor name can be entered manually or automatically populated
-      professorId: facultyid, // Use the facultyId from the URL
-    };
-
+  const fetchSchedules = async () => {
     try {
-      // Send the data to the server
-      const response = await axios.post(
-        "http://localhost:8000/api/createSchedule",
-        scheduleData
+      const response = await axios.get(
+        `http://localhost:8000/api/schedules/${facultyid}`
       );
-
-      if (response.status === 200) {
-        console.log("Schedule added successfully:", response.data);
-        // Reset form fields if successful
-        setCourse("");
-        setCode("");
-        setTime("");
-        setStatus("");
-        setProfessor("");
-        setRoom("101"); // Reset room field
-      }
+      setSchedules(response.data);
+      setLoading(false);
     } catch (error) {
-      console.error("Error adding schedule:", error);
+      console.error("Error fetching schedules:", error);
+      setLoading(false);
     }
   };
 
+  const handleCancel = async (scheduleCode) => {
+    try {
+      await axios.put(
+        `http://localhost:8000/api/schedules/${scheduleCode}/cancel`
+      );
+      fetchSchedules(); // Refresh after cancellation
+    } catch (error) {
+      console.error("Error cancelling schedule:", error);
+    }
+  };
+
+  const getStatusClass = (status) => {
+    switch (status) {
+      case "ongoing":
+        return "ongoing";
+      case "upcoming":
+        return "upcoming";
+      case "cancelled":
+        return "cancelled";
+      default:
+        return "";
+    }
+  };
+
+  useEffect(() => {
+    if (facultyid) {
+      fetchSchedules();
+    }
+  }, [facultyid]);
+
   return (
-    <div className="faculty-schedule-form">
-      <h1>Add a Schedule</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Course"
-          value={course}
-          onChange={(e) => setCourse(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Code (4 digits)"
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-          required
-          pattern="\d{4}" // Ensure only 4 digits are entered
-        />
-        <input
-          type="text"
-          placeholder="Time (e.g. 14:00 - 15:00)"
-          value={time}
-          onChange={(e) => setTime(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Status (ongoing/upcoming/cancelled)"
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Professor Name"
-          value={professor}
-          onChange={(e) => setProfessor(e.target.value)}
-          required
-        />
-        {/* Optionally, you can show the professorId as a read-only field */}
-        <input
-          type="text"
-          value={facultyid} // Read-only field showing the faculty's ID
-          readOnly
-        />
-        <button type="submit">Add Schedule</button>
-      </form>
+    <div>
+      <div id="allschedules">
+        <h1>All Schedules</h1>
+        <div className="schedules-container">
+          {loading ? (
+            <p>Loading schedules...</p>
+          ) : schedules.length === 0 ? (
+            <p>No schedules available.</p>
+          ) : (
+            schedules.map((item) => (
+              <div
+                key={item.code}
+                className={`schedules ${getStatusClass(item.status)}`}
+              >
+                <p>
+                  <b>Course:</b> {item.course}
+                </p>
+                <p>
+                  <b>Code:</b> {item.code}
+                </p>
+                <p>
+                  <b>Time:</b>{" "}
+                  {new Date(item.startTime).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}{" "}
+                  -{" "}
+                  {new Date(item.endTime).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </p>
+                <p>
+                  <b>Status:</b> {item.status}
+                </p>
+                <p>
+                  <b>Professor:</b> {item.professor}
+                </p>
+                <p>
+                  <b>Room:</b> {item.room}
+                </p>
+
+                {item.status === "upcoming" && (
+                  <button onClick={() => handleCancel(item.code)}>
+                    Cancel
+                  </button>
+                )}
+              </div>
+            ))
+          )}
+        </div>
+      </div>
     </div>
   );
 };
