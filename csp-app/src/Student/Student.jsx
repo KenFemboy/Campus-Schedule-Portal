@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import "./Student.css";
 import Mainpage from "../Mainpage/Mainpage";
@@ -8,7 +8,7 @@ const Student = () => {
   const { studentid } = useParams();
   const [favoriteSchedules, setFavoriteSchedules] = useState([]);
 
-  const fetchFavoriteSchedules = async () => {
+  const fetchFavoriteSchedules = useCallback(async () => {
     try {
       const response = await axios.get(
         `https://campus-schedule-portal.onrender.com/api/student/${studentid}/allfavorites`
@@ -17,32 +17,31 @@ const Student = () => {
     } catch (error) {
       console.error("Error fetching favorite schedules:", error);
     }
-  };
+  }, [studentid]);
+
   const handleUnfavorite = async (scheduleCode) => {
     try {
       await axios.put(
         `https://campus-schedule-portal.onrender.com/api/student/${studentid}/unfavorite`,
         { code: scheduleCode }
       );
-
-      fetchFavoriteSchedules();
+      fetchFavoriteSchedules(); // refresh list
     } catch (error) {
       console.error("Error removing favorite:", error);
     }
   };
+
   useEffect(() => {
     if (studentid) {
-      fetchFavoriteSchedules();
-
-      const intervalId = setInterval(fetchFavoriteSchedules, 5000);
-
-      return () => clearInterval(intervalId);
+      fetchFavoriteSchedules(); // initial load
+      const intervalId = setInterval(fetchFavoriteSchedules, 5000); // polling
+      return () => clearInterval(intervalId); // cleanup
     }
-  }, [studentid]);
+  }, [studentid, fetchFavoriteSchedules]);
+
   return (
     <div>
       <Mainpage />
-
       <div className="favorites">
         <h1>Your Favorite Schedules</h1>
         {favoriteSchedules.length > 0 ? (
