@@ -19,7 +19,7 @@ const FacultyCreateSchedule = () => {
   const fetchSchedules = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/schedules/${facultyid}`
+        `https://campus-schedule-portal.onrender.com/api/schedules/${facultyid}`
       );
       setSchedules(response.data);
       setLoading(false);
@@ -48,7 +48,7 @@ const FacultyCreateSchedule = () => {
     const fetchProfessorName = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/faculty/${facultyid}/fullname`
+          `https://campus-schedule-portal.onrender.com/api/faculty/${facultyid}/fullname`
         );
         setProfessor(response.data.fullname);
       } catch (error) {
@@ -96,7 +96,7 @@ const FacultyCreateSchedule = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/createSchedule",
+        "https://campus-schedule-portal.onrender.com/api/createSchedule",
         scheduleData
       );
 
