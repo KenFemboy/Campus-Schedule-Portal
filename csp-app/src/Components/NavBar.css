@@ -1,6 +1,7 @@
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -13,9 +14,13 @@ body {
 nav img {
   width: 150px;
 }
-.logos img {
+.navbar .logos img {
   width: 50px;
   padding-right: 0.7rem;
+  filter: brightness(0) invert(1);
+}
+.navbar .logo {
+  filter: brightness(0) invert(1);
 }
 .department {
   display: flex;
@@ -23,4 +28,11 @@ nav img {
   font-size: 1.3em;
   color: #f0f0f0;
   text-shadow: 2px 1px 1px rgb(0, 0, 0);
+}
+@media (max-width: 768px) {
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
 }

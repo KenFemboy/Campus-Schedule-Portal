@@ -40,7 +40,7 @@ const Student = () => {
     }
   }, [studentid]);
   return (
-    <div>
+    <div id="student">
       <Mainpage />
 
       <div className="favorites">
