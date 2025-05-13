@@ -22,7 +22,7 @@ nav img {
 .navbar .logo {
   filter: brightness(0) invert(1);
 }
-.department {
+.title {
   display: flex;
   justify-content: center;
   font-size: 1.3em;
@@ -37,5 +37,8 @@ nav img {
   }
   nav img {
     width: 100px;
+  }
+  .title {
+    display: none;
   }
 }
