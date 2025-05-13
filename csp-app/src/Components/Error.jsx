@@ -5,7 +5,9 @@ const Error = () => {
     <div class="error">
       <img src="/logo-csp.png" alt="csp-logo" class="logo-csp" />
       <p>SOMETHING WENT WRONG</p>
-      <a href="https://placehold.co/40x40?text=🏫">Go Back</a>
+      <Link to="/">
+        <b>Go Back</b>
+      </Link>
     </div>
   );
 };

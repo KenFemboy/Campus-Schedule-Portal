@@ -8,8 +8,8 @@ const NavBar = () => {
         <img src="/svg/final-logo.svg" alt="CSP Icon" className="logo" />
       </Link>
 
-      <div className="user-info">
-        <div class="department">Class Schedule Portal</div>
+      <div>
+        <div className="title">Class Schedule Portal</div>
       </div>
       <div className="logos">
         <Link to="/announcements">
