@@ -119,79 +119,71 @@ const FacultyCreateSchedule = () => {
   };
 
   return (
-    <div>
-      <div className="faculty-schedule-form">
-        <h1>Add a Schedule</h1>
-        <form onSubmit={handleSubmit}>
-          <label>Course</label>
-          <select
-            value={course}
-            onChange={(e) => setCourse(e.target.value)}
-            required
-          >
-            <option value="">Select Course</option>
-            <option value="IT">IT</option>
-            <option value="CS">CS</option>
-            <option value="Engineering">Engineering</option>
-          </select>
+    <div className="faculty-schedule-form">
+      <h1>Add a Schedule</h1>
+      <form onSubmit={handleSubmit}>
+        <label>Course</label>
+        <select
+          value={course}
+          onChange={(e) => setCourse(e.target.value)}
+          required
+        >
+          <option value="">Select Course</option>
+          <option value="IT">IT</option>
+          <option value="CS">CS</option>
+          <option value="Engineering">Engineering</option>
+        </select>
 
+        <input
+          type="text"
+          placeholder="Code (4 digits)"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+          required
+          pattern="\d{4}"
+          maxLength={4}
+        />
+
+        <label>Time Range (30-minute intervals from 7:00 AM - 10:00 PM)</label>
+        <div style={{ display: "flex", gap: "1rem" }}>
           <input
-            type="text"
-            placeholder="Code (4 digits)"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
+            type="time"
+            min="07:00"
+            max="22:00"
+            value={startTime}
+            onChange={(e) => setStartTime(e.target.value)}
             required
-            pattern="\d{4}"
-            maxLength={4}
           />
-
-          <label>
-            Time Range (30-minute intervals from 7:00 AM - 10:00 PM)
-          </label>
-          <div style={{ display: "flex", gap: "1rem" }}>
-            <input
-              type="time"
-              min="07:00"
-              max="22:00"
-              value={startTime}
-              onChange={(e) => setStartTime(e.target.value)}
-              required
-            />
-            <span>to</span>
-            <input
-              type="time"
-              min="07:00"
-              max="22:00"
-              value={endTime}
-              onChange={(e) => setEndTime(e.target.value)}
-              required
-              step="1800"
-            />
-          </div>
-
-          <label>Room</label>
-          <select
-            value={room}
-            onChange={(e) => setRoom(e.target.value)}
-            required
-          >
-            <option value="">Select Room</option>
-            <option value="101">101</option>
-            <option value="102">102</option>
-            <option value="103">103</option>
-            <option value="104">104</option>
-          </select>
-
+          <span>to</span>
           <input
-            type="text"
-            placeholder="Professor Name"
-            value={professor}
-            readOnly
+            type="time"
+            min="07:00"
+            max="22:00"
+            step="1800"
+            value={endTime}
+            onChange={(e) => setEndTime(e.target.value)}
+            required
           />
-          <input type="text" value={facultyid} readOnly />
-          <button type="submit">Add Schedule</button>
-        </form>
-      </div>
+        </div>
+
+        <label>Room</label>
+        <select value={room} onChange={(e) => setRoom(e.target.value)} required>
+          <option value="">Select Room</option>
+          <option value="101">101</option>
+          <option value="102">102</option>
+          <option value="103">103</option>
+          <option value="104">104</option>
+        </select>
+
+        <input
+          type="text"
+          placeholder="Professor Name"
+          value={professor}
+          readOnly
+        />
+        <input type="text" value={facultyid} readOnly />
+        <button type="submit">Add Schedule</button>
+      </form>
     </div>
   );
 };

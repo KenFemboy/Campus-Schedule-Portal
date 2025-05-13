@@ -157,3 +157,16 @@ export const markScheduleAsOngoing = async (req, res) => {
     res.status(500).json({ message: "Error updating schedule", error });
   }
 };
+export const deleteScheduleByCode = async (req, res) => {
+  try {
+    const deleted = await Schedule.findOneAndDelete({ code: req.params.code });
+
+    if (!deleted) {
+      return res.status(404).json({ message: "Schedule not found" });
+    }
+
+    res.json({ message: "Schedule deleted successfully", deleted });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting schedule", error });
+  }
+};

@@ -40,7 +40,7 @@ const Student = () => {
   }, [studentid, fetchFavoriteSchedules]);
 
   return (
-    <div>
+    <div id="student">
       <Mainpage />
       <div className="favorites">
         <h1>Your Favorite Schedules</h1>

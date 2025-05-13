@@ -18,6 +18,7 @@ import {
   cancelSchedulebyCode,
   markScheduleAsUpcoming,
   markScheduleAsOngoing,
+  deleteScheduleByCode,
 } from "../controller/scheduleController.js";
 import {
   announcements,
@@ -58,5 +59,6 @@ route.put("/student/:id/unfavorite", removefromFavoriteSchedule);
 route.put("/schedules/:code/cancel", cancelSchedulebyCode);
 route.put("/schedules/:code/upcoming", markScheduleAsUpcoming);
 route.put("/schedules/:code/ongoing", markScheduleAsOngoing);
-
+//DELETE
+route.delete("/schedules/:code", deleteScheduleByCode);
 export default route;
