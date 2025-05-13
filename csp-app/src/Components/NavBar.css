@@ -35,4 +35,7 @@ nav img {
     top: 0;
     z-index: 1000;
   }
+  nav img {
+    width: 100px;
+  }
 }
