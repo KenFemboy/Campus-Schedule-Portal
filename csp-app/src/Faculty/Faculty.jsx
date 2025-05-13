@@ -7,11 +7,12 @@ const Faculty = () => {
   const { facultyid } = useParams();
   const [schedules, setSchedules] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showDeleteButtons, setShowDeleteButtons] = useState(false); // 👈 New state
 
   const fetchSchedules = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/schedules/${facultyid}`
+        `https://campus-schedule-portal.onrender.com/api/schedules/${facultyid}`
       );
       setSchedules(response.data);
       setLoading(false);
@@ -24,31 +25,44 @@ const Faculty = () => {
   const handleCancel = async (scheduleCode) => {
     try {
       await axios.put(
-        `http://localhost:8000/api/schedules/${scheduleCode}/cancel`
+        `https://campus-schedule-portal.onrender.com/api/schedules/${scheduleCode}/cancel`
       );
-      fetchSchedules(); // Refresh after cancellation
+      fetchSchedules();
     } catch (error) {
       console.error("Error cancelling schedule:", error);
     }
   };
+
   const handleMakeUpcoming = async (scheduleCode) => {
     try {
       await axios.put(
-        `http://localhost:8000/api/schedules/${scheduleCode}/upcoming`
+        `https://campus-schedule-portal.onrender.com/api/schedules/${scheduleCode}/upcoming`
       );
-      fetchSchedules(); // Refresh the schedule list after the update
+      fetchSchedules();
     } catch (error) {
-      console.error("Error updating schedule:", error);
+      console.error("Error updating schedule to upcoming:", error);
     }
   };
+
   const handleMakeOngoing = async (scheduleCode) => {
     try {
       await axios.put(
-        `http://localhost:8000/api/schedules/${scheduleCode}/ongoing`
+        `https://campus-schedule-portal.onrender.com/api/schedules/${scheduleCode}/ongoing`
       );
-      fetchSchedules(); // Refresh the schedule list after the update
+      fetchSchedules();
     } catch (error) {
-      console.error("Error updating schedule:", error);
+      console.error("Error updating schedule to ongoing:", error);
+    }
+  };
+
+  const handleDelete = async (scheduleCode) => {
+    try {
+      await axios.delete(
+        `https://campus-schedule-portal.onrender.com/api/schedules/${scheduleCode}`
+      );
+      fetchSchedules();
+    } catch (error) {
+      console.error("Error deleting schedule:", error);
     }
   };
 
@@ -72,9 +86,16 @@ const Faculty = () => {
   }, [facultyid]);
 
   return (
-    <div>
+    <div id="faculty">
       <div id="allschedules">
         <h1>All Schedules</h1>
+        <button
+          className="deleteSchedules"
+          onClick={() => setShowDeleteButtons(!showDeleteButtons)} // 👈 Toggle button
+        >
+          {showDeleteButtons ? "Hide" : "Delete Schedules"}
+        </button>
+
         <div className="schedules-container">
           {loading ? (
             <p>Loading schedules...</p>
@@ -114,31 +135,76 @@ const Faculty = () => {
                   <b>Room:</b> {item.room}
                 </p>
 
-                {item.status === "upcoming" && (
-                  <>
-                    <button onClick={() => handleCancel(item.code)}>
-                      Cancel
-                    </button>
-                    <button onClick={() => handleMakeOngoing(item.code)}>
-                      Make Ongoing
-                    </button>
-                  </>
-                )}
-
-                {item.status === "cancelled" && (
-                  <button onClick={() => handleMakeUpcoming(item.code)}>
-                    Make Upcoming
-                  </button>
-                )}
-                {item.status === "ongoing" && (
-                  <>
-                    <button onClick={() => handleCancel(item.code)}>
-                      Cancel
-                    </button>
-                    <button onClick={() => handleMakeUpcoming(item.code)}>
+                <div className="button-group">
+                  {item.status === "upcoming" && (
+                    <>
+                      <button
+                        onClick={() => handleCancel(item.code)}
+                        style={{
+                          backgroundColor: "darkred",
+                          color: "white",
+                        }}
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={() => handleMakeOngoing(item.code)}
+                        style={{
+                          backgroundColor: "rgb(63, 116, 63)",
+                          color: "black",
+                        }}
+                      >
+                        Make Ongoing
+                      </button>
+                    </>
+                  )}
+                  {item.status === "ongoing" && (
+                    <>
+                      <button
+                        onClick={() => handleCancel(item.code)}
+                        style={{
+                          backgroundColor: "darkred",
+                          color: "white",
+                        }}
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={() => handleMakeUpcoming(item.code)}
+                        style={{
+                          backgroundColor: "rgb(229, 229, 59)",
+                          color: "black",
+                        }}
+                      >
+                        Make Upcoming
+                      </button>
+                    </>
+                  )}
+                  {item.status === "cancelled" && (
+                    <button
+                      onClick={() => handleMakeUpcoming(item.code)}
+                      style={{
+                        backgroundColor: "rgb(229, 229, 59)",
+                        color: "black",
+                      }}
+                    >
                       Make Upcoming
                     </button>
-                  </>
+                  )}
+                </div>
+
+                {/* 👇 Conditionally rendered Delete button */}
+                {showDeleteButtons && (
+                  <button
+                    onClick={() => handleDelete(item.code)}
+                    style={{
+                      backgroundColor: "darkred",
+                      color: "white",
+                      marginTop: "0.5rem",
+                    }}
+                  >
+                    Delete
+                  </button>
                 )}
               </div>
             ))

@@ -8,7 +8,7 @@ import Footer from "./Components/Footer";
 import Login from "./Authentication/Login";
 import Admin from "./Admin/Admin";
 import NavBar from "./Components/NavBar";
-
+import Error from "./Components/Error";
 function App() {
   const route = createBrowserRouter([
     {
@@ -53,11 +53,26 @@ function App() {
     },
     {
       path: "/announcements",
-      element: <Announcements />,
+      element: (
+        <>
+          <NavBar />
+          <Announcements />
+          <Footer />
+        </>
+      ),
     },
     {
       path: "/admin",
       element: <Admin />,
+    },
+    {
+      path: "*",
+      element: (
+        <>
+          <NavBar />
+          <Error />
+        </>
+      ),
     },
   ]);
   return (

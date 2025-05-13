@@ -1,49 +1,7 @@
-#allschedules h1 {
-  padding: 1.3rem;
-}
-
-#allschedules {
-  background-color: rgb(255, 255, 255);
-  border-radius: 1.5rem;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  text-align: center;
-}
-
 .schedules-container {
   flex-wrap: wrap;
   justify-content: space-evenly;
   text-align: left;
-}
-
-.schedules {
-  border: 2px solid #eedede;
-  border-radius: 10px;
-  padding: 20px;
-  width: calc(25% - 20px);
-  margin-bottom: 2rem;
-}
-
-.Upcoming {
-  background-color: rgb(229, 229, 59);
-}
-
-.cancelled {
-  background-color: rgb(178, 45, 45);
-  color: rgb(255, 255, 255);
-}
-
-.ongoing {
-  background-color: rgb(108, 208, 108);
-}
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: rgb(214, 212, 212);
-  margin: 0;
-  padding: 2rem;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
 }
 
 .faculty-schedule-form {
@@ -52,7 +10,6 @@ body {
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 600px;
 }
 
 .faculty-schedule-form h1 {
@@ -95,7 +52,19 @@ input[readonly] {
   background-color: #ecf0f1;
   cursor: not-allowed;
 }
-
+.faculty-schedule-form [type="submit"] {
+  background-color: #b10303;
+  margin-top: 1.5rem;
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 10px;
+}
 .faculty-schedule-form div {
   display: flex;
   align-items: center;
@@ -107,9 +76,9 @@ span {
   color: #555;
 }
 
-button {
+#faculty button {
   margin-top: 1.5rem;
-  background-color: #7d0a0a;
+
   color: white;
   padding: 0.75rem;
   border: none;
@@ -118,8 +87,11 @@ button {
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-right: 10px;
 }
-
+.deleteSchedules {
+  background-color: #b10303;
+}
 button:hover {
   background-color: #b10303;
 }
